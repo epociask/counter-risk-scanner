@@ -4,7 +4,6 @@ from src.utils import (abi_hash, sha256_hash)
 class CounterPartyAnalyzer(Analyzer):
     def __init__(self, gnosis_abi: list[dict], ownable_abi: list[dict]) -> None:
         self.gnosis_fingerprint: hex = abi_hash(gnosis_abi)
-        print("Generated gnosis fingerprint")
         self.ownable_abi = ownable_abi
 
     def assess():
@@ -27,7 +26,6 @@ class CounterPartyAnalyzer(Analyzer):
         for ownable_item in self.ownable_abi:
             for arbitrary_item in contract_abi:
                 if ownable_item == arbitrary_item:
-                    print("EQUALITY")
                     overlap_count += 1
 
         return (ownable_len) == overlap_count

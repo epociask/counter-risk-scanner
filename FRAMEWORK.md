@@ -32,6 +32,11 @@ The outlined methodology:
 
 **NOTE:** Understanding who governs a tokenized EVM asset would require mapping an Ethereum address to a real-human being. Unfortunatetly, this is not something that can be solved with a backend static analysis tool.
 
+### Automation Assumption(s)
+1. Tokenized asset inherits the _OpenZepellin_ `Ownable` standard [contract](https://docs.openzeppelin.com/contracts/3.x/api/access#Ownable) or the `AccessControl` standard [contract](https://docs.openzeppelin.com/contracts/3.x/api/access#AccessControl) for embedding access controls. 
+
+2. 
+
 ### Automation PoC
 
 ## Market Risk(s)

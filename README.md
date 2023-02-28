@@ -1,6 +1,7 @@
 # (CRS) Counter Risk Scanner
+_Author(s)_: @epociask
 
-Dynamic/Static analysis on tokenized assets (ERC-20, ERC-721) for counter-party and market related risks. 
+Dynamic/Static analysis for EVM tokenized assets (ERC-20, ERC-721) that assesses for counter-party and market related risks. 
 
 __Please see [FRAMEWORK.md](./FRAMEWORK.md) to understand risk methodology & classification procedures__
 
