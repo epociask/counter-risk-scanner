@@ -35,7 +35,7 @@ The outlined methodology:
 ### Automation Assumption(s)
 1. Tokenized asset inherits the _OpenZepellin_ `Ownable` standard [contract](https://docs.openzeppelin.com/contracts/3.x/api/access#Ownable) or the `AccessControl` standard [contract](https://docs.openzeppelin.com/contracts/3.x/api/access#AccessControl) for embedding access controls. 
 
-2. 
+2. Asset uses proxy/delegate upgrade pattern that is detectable by Etherscan.
 
 ### Automation PoC
 
