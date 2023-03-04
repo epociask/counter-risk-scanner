@@ -7,7 +7,6 @@ class GnosisState:
     n: int
     score: float
 
-
 class NodeAPI:
     def __init__(self, rpc_url: str, gnosis_abi: list[dict]) -> None:
         self.rpc_url = rpc_url
@@ -22,9 +21,8 @@ class NodeAPI:
     def get_gnosis_state(self, address: str) -> GnosisState:
         contract = self.w3.eth.contract(address=address, abi=self.gnosis_abi)
 
-        print(contract.caller())
         m: int = int(contract.caller().getThreshold())
         n: int = int(contract.caller().getOwners())
-        score: float = m/n
+        score: float = (m/n)
 
         return GnosisState(m, n, score)

@@ -10,10 +10,6 @@ log2 = lambda x : math.log10(x) / math.log10(2)
 def is_power_of_2(num: int) -> bool:
     return (math.ceil(log2(num)) == math.floor(log2(num)))
 
-def read_json_from_file(fileName: str) -> dict:
-    with open(fileName, "r") as fr:
-        return json.load(fr)
-
 def abi_hash(abi: list[dict]) -> str:
     # Extract ABI function entries and ignore all non-function entries
     reduced_abi: list[dict] = [item for item in abi if "name" in item]

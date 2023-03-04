@@ -5,6 +5,11 @@ from enum import Enum
 from src.settings import Network
 
 """
+Helper lambda functions
+"""
+is_proxy = lambda contract: contract["Proxy"] == "1"
+
+"""
 Data type declarations
 """
 
@@ -44,6 +49,7 @@ class EtherscanAPI:
     
 
     def get_contract_abi(self, address: str) -> list[dict]:
+        print("Getting contract ABI for ", address)
         resp = self.get_etherscan_response(address, Module.contract, Action.get_abi)
         return json.loads(resp)
 
@@ -70,6 +76,7 @@ class EtherscanAPI:
                                                     self.key
                                                 )
 
+        print(url)
         resp: requests.Response = requests.get(url, HEADER)
 
         if resp.status_code != 200:
