@@ -16,8 +16,8 @@ The outlined methodology:
 2. Can these counterparty controls be exercised in a way that drastically impacts safe [custodiability](https://help.coinbase.com/en/coinbase/privacy-and-security/other/asset-security-review) of the asset?
 
 3. Are these counterparty controls sufficiently decentralized?
-    a) Is there at least greater than `(1/2n)` [trust](https://vitalik.ca/general/2020/08/20/trust.html) required for a counterparty group before priveleged functions can be called? 
-    b) Is there at least greater than `x` actors total per some counterparty group?
+    a. Is there at least greater than `(1/2n)` [trust](https://vitalik.ca/general/2020/08/20/trust.html) required for a counterparty group before priveleged functions can be called? 
+    b. Is there at least greater than `x` actors total per some counterparty group?
 
 **NOTE:** Understanding who governs a tokenized EVM asset would require mapping an Ethereum address to a real-human being. Unfortunatetly, this is not something that can be solved with a backend static analysis tool.
 
