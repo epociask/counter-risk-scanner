@@ -1,4 +1,4 @@
-# Risk Management Framework for Detecting Asset Related Counterparty & Market Specific Risks
+# Risk Management Framework for Detecting Asset Related Counterparty Risks
 
 ## Counterparty Risk Enumeration
 Counterparty risks qualitatively assess what party governs an asset and how they do so.
