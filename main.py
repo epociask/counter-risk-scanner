@@ -1,4 +1,4 @@
-from src.settings import (ETHERSCAN_API_KEY, ETHEREUM_RPC_ENDPOINT)
+from src.settings import (BSCSCAN_API_KEY, BSCSCAN_RPC_ENDPOINT, ETHERSCAN_API_KEY, ETHEREUM_RPC_ENDPOINT)
 from src.settings import Network
 from src.clients.etherscan import EtherscanAPI
 from src.clients.node import (NodeAPI, GnosisState)
@@ -24,8 +24,14 @@ def risk_assess():
     gnosis_abi: list[dict] = system.read_json_from_file("abi/gnosis_multisig.json")
     ownable_abi: list[dict] = system.read_json_from_file("abi/ownable.json")
 
-    explorer: EtherscanAPI = EtherscanAPI(ETHERSCAN_API_KEY, Network(network))
-    node: NodeAPI = NodeAPI(ETHEREUM_RPC_ENDPOINT, gnosis_abi)
+    if network == "eth":
+        explorer: EtherscanAPI = EtherscanAPI(ETHERSCAN_API_KEY, Network(network))
+        node: NodeAPI = NodeAPI(ETHEREUM_RPC_ENDPOINT, gnosis_abi)
+
+    else:
+        explorer: EtherscanAPI = EtherscanAPI(BSCSCAN_API_KEY, Network(network))
+        node: NodeAPI = NodeAPI(BSCSCAN_RPC_ENDPOINT, gnosis_abi)   
+
     builder: asset.Builder = asset.Builder(explorer, node)
 
     contracts: list[dict] = explorer.get_contract_source(address)
@@ -91,17 +97,14 @@ def risk_assess():
         graphs = system.generate_call_graphs(file_id, impl_src["ContractName"], functions)
         assessment = Assessment(owner_addr, [])
         
-        print("Graphs ", graphs)
         for (graph, function) in enumerate(graphs):
-            print("Func", function)
-            print(graph)
             if "_onlyOwner" in graph:
                 assessment.custodial_functions.append(function)
         
         assessment.threats = threats
 
-    return jsonify(assessment.serialize())
+        return jsonify(assessment.serialize()) 
 
-    reutrn  
+
 if __name__ == "__main__":
     app.run(debug=True)

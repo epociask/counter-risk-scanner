@@ -32,6 +32,17 @@ class SystemAPI:
         self.sol_compiler: SolcCompiler = SolcCompiler()
         self.cached_files: list[str] = []
 
+    def read_file(self, name: str) -> str:
+        file_name = TEMP_PATH + name + SOLIDITY_EXT
+
+        print("Reading ", file_name)
+
+        f = open(file_name, "r")
+        lines = f.read()
+        print(lines)
+
+        return lines
+
     def read_json_from_file(self, fileName: str, tmp: bool=False) -> dict:
         if tmp:
             fileName = TEMP_PATH + fileName
@@ -113,13 +124,25 @@ class SystemAPI:
     def generate_call_graphs(self, file_key: str, contract_name: str, functions: list) -> list:
         l = []
 
+        source = self.read_file(file_key)
+        names = []
+
+        for m in re.finditer("(contract .+{)", source):
+            names.append(m.group(0).split(" ")[1])
+
+
+        print(functions)
+        # for name in names:
         for func in functions:
-            proc: subprocess.Popen = subprocess.Popen(["surya", "ftrace", f"{contract_name}::{func}", "all", TEMP_PATH + file_key + SOLIDITY_EXT, "--json"], stdout=subprocess.PIPE)
+            cmd = ["surya", "ftrace", f"{contract_name}::{func}", "all", TEMP_PATH + file_key + SOLIDITY_EXT, "--json"]
+            print(cmd)
+            proc: subprocess.Popen = subprocess.Popen(cmd, stdout=subprocess.PIPE)
 
             lines = proc.stdout.readlines()
 
 
-            print(lines)
-            l.append(lines)
+            if "function is not present" not in str(lines):
+                l.append(lines)
+                functions.remove(func)
 
         return l 

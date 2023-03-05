@@ -21,6 +21,7 @@ Etherscan endpoints and other explorer interaction related constants
 """
 
 ETHERSCAN_URL: str = "https://api.etherscan.io/api"
+BSCSCAN_URL: str = "https://api.bscscan.com/api"
 
 # TODO - Make these named string parameters
 EXTENSION: str = "?module={0}&action={1}&address={2}&apikey={3}"
@@ -65,6 +66,9 @@ class EtherscanAPI:
     def get_endpoint(self, net: Network) -> str:
         if self.net == Network.eth:
             return ETHERSCAN_URL
+        
+        if self.net == Network.bsc:
+            return BSCSCAN_URL
         
         raise Exception("Invalid network provided", net)
     
